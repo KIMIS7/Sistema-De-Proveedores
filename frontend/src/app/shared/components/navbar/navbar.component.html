@@ -1,0 +1,30 @@
+<nav class="bg-slate-800 shadow-lg">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex justify-between items-center h-16">
+      <a routerLink="/" class="text-xl font-bold text-white">
+        Sistema de Proveedores
+      </a>
+      
+      <div class="flex space-x-1">
+        <a 
+          routerLink="/providers" 
+          routerLinkActive="bg-slate-700"
+          class="px-4 py-2 rounded-md text-slate-200 hover:bg-slate-700 transition-colors">
+          Proveedores
+        </a>
+        <a 
+          routerLink="/services" 
+          routerLinkActive="bg-slate-700"
+          class="px-4 py-2 rounded-md text-slate-200 hover:bg-slate-700 transition-colors">
+          Servicios
+        </a>
+        <a 
+          routerLink="/rates" 
+          routerLinkActive="bg-slate-700"
+          class="px-4 py-2 rounded-md text-slate-200 hover:bg-slate-700 transition-colors">
+          Tarifarios
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
