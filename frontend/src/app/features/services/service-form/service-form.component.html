@@ -1,0 +1,74 @@
+<div class="max-w-2xl mx-auto">
+  <div class="bg-white rounded-lg shadow p-6">
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">
+      {{ isEditMode ? 'Editar Servicio' : 'Nuevo Servicio' }}
+    </h1>
+
+    @if (error) {
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+        {{ error }}
+      </div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Nombre *</label>
+        <input 
+          type="text" 
+          formControlName="name"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Nombre del servicio">
+        @if (form.get('name')?.touched && form.get('name')?.errors) {
+          <p class="mt-1 text-sm text-red-600">El nombre es requerido (mínimo 2 caracteres)</p>
+        }
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
+        <textarea 
+          formControlName="description"
+          rows="3"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Descripción del servicio"></textarea>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Proveedor *</label>
+        <select 
+          formControlName="providerId"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+          <option value="">Selecciona un proveedor</option>
+          @for (provider of providers; track provider.id) {
+            <option [value]="provider.id">{{ provider.name }}</option>
+          }
+        </select>
+        @if (form.get('providerId')?.touched && form.get('providerId')?.errors) {
+          <p class="mt-1 text-sm text-red-600">El proveedor es requerido</p>
+        }
+      </div>
+
+      <div class="flex items-center">
+        <input 
+          type="checkbox" 
+          formControlName="isActive"
+          id="isActive"
+          class="h-4 w-4 text-blue-600 rounded border-gray-300">
+        <label for="isActive" class="ml-2 text-sm text-gray-700">Servicio activo</label>
+      </div>
+
+      <div class="flex gap-3 pt-4">
+        <button 
+          type="submit"
+          [disabled]="loading"
+          class="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors">
+          {{ loading ? 'Guardando...' : (isEditMode ? 'Actualizar' : 'Crear') }}
+        </button>
+        <a 
+          routerLink="/services"
+          class="flex-1 text-center bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors">
+          Cancelar
+        </a>
+      </div>
+    </form>
+  </div>
+</div>

@@ -6,6 +6,7 @@ import { ProvidersModule } from './providers/providers.module';
 import { ServicesModule } from './services/services.module';
 import { RatesModule } from './rates/rates.module';
 
+//Conexion a BD
 
 @Module({
   imports: [TypeOrmModule.forRoot({

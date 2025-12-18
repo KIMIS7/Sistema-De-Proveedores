@@ -1,0 +1,56 @@
+<div class="max-w-2xl mx-auto">
+  @if (loading) {
+    <div class="text-center py-8">
+      <p class="text-gray-500">Cargando...</p>
+    </div>
+  } @else if (error) {
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+      {{ error }}
+    </div>
+  } @else if (service) {
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+      <div class="px-6 py-4 bg-slate-800">
+        <h1 class="text-2xl font-bold text-white">{{ service.name }}</h1>
+      </div>
+      
+      <div class="p-6 space-y-4">
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <p class="text-sm text-gray-500">Proveedor</p>
+            <p class="font-medium">{{ service.provider?.name || 'Sin proveedor' }}</p>
+          </div>
+          <div>
+            <p class="text-sm text-gray-500">Estado</p>
+            @if (service.isActive) {
+              <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Activo</span>
+            } @else {
+              <span class="px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">Inactivo</span>
+            }
+          </div>
+          <div class="col-span-2">
+            <p class="text-sm text-gray-500">Descripción</p>
+            <p class="font-medium">{{ service.description || 'Sin descripción' }}</p>
+          </div>
+        </div>
+
+        <div class="flex gap-3 pt-4 border-t">
+          <a 
+            [routerLink]="['/services', service.id, 'edit']"
+            class="flex-1 text-center bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors">
+            Editar
+          </a>
+          <button 
+            (click)="deleteService()"
+            class="flex-1 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors">
+            Eliminar
+          </button>
+          <a 
+            routerLink="/services"
+            class="flex-1 text-center bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors">
+            Volver
+          </a>
+        </div>
+      </div>
+    </div>
+  }
+</div>

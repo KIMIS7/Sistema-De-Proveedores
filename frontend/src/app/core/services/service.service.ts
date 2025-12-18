@@ -17,7 +17,7 @@ export class ServiceService {
   }
 
   getById(id:number): Observable <Service>{
-    return this.http.get<Service>(`${this.apiUrl},/${id}`);
+    return this.http.get<Service>(`${this.apiUrl}/${id}`);
   }
 
   getByProvider(providerId:number): Observable <Service[]>{
