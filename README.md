@@ -154,18 +154,6 @@ npm start
 ```
 La aplicación estará disponible en: `http://localhost:4200`
 
-### Opción 2: Script de inicio rápido (opcional)
-
-Puedes crear un script en la raíz del proyecto:
-
-```bash
-# Crear archivo start.sh (Mac/Linux)
-echo '#!/bin/bash
-cd backend && npm run start:dev &
-cd frontend && npm start' > start.sh
-chmod +x start.sh
-./start.sh
-```
 
 ---
 
