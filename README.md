@@ -21,7 +21,6 @@ Sistema Full-Stack para la gestión de proveedores, sus servicios y tarifarios. 
 - [Endpoints de la API](#-endpoints-de-la-api)
 - [Estructura del Proyecto](#-estructura-del-proyecto)
 - [Reglas de Negocio](#-reglas-de-negocio)
-- [Capturas de Pantalla](#-capturas-de-pantalla)
 
 ---
 
