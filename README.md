@@ -1,4 +1,4 @@
-# 🏢 Sistema de Gestión de Proveedores, Servicios y Tarifarios
+#  Sistema de Gestión de Proveedores, Servicios y Tarifarios
 
 Sistema Full-Stack para la gestión de proveedores, sus servicios y tarifarios. Desarrollado con **NestJS** (Backend) y **Angular** (Frontend).
 
@@ -137,7 +137,7 @@ npm install
 
 ---
 
-## ▶️ Ejecución
+## ▶Ejecución
 
 ### Opción 1: Ejecutar por separado
 
@@ -379,22 +379,6 @@ Tarifario existente:  |-------- 01/01 - 30/06 --------|
 Nuevo tarifario:                                        |---- 01/07 - 31/12 ----| ✅ PERMITIDO
 ```
 
----
-
-##  Capturas de Pantalla
-
-### Lista de Proveedores
-![Lista de Proveedores](./screenshots/provider-list.png)
-
-### Formulario de Creación
-![Formulario](./screenshots/provider-form.png)
-
-### Detalle de Proveedor
-![Detalle](./screenshots/provider-detail.png)
-
-> **Nota**: Agrega tus propias capturas de pantalla en una carpeta `/screenshots`
-
----
 
 ##  Modelo de Datos
 
