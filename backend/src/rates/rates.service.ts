@@ -13,10 +13,12 @@ export class RatesService {
   ) {}
 
   async create(createRateDto: CreateRateDto) {
+    // Buscar tarifarios existentes del mismo servicio
     const existingRates = await this.rateRepository.find({
       where: { service: { id: createRateDto.serviceId } },
     });
 
+    // Verificar overlap de fechas
     const newStart = new Date(createRateDto.startDate);
     const newEnd = new Date(createRateDto.endDate);
 
@@ -24,15 +26,18 @@ export class RatesService {
       const existingStart = new Date(rate.startDate);
       const existingEnd = new Date(rate.endDate);
 
+      // Hay overlap si: newStart <= existingEnd AND newEnd >= existingStart
       if (newStart <= existingEnd && newEnd >= existingStart) {
         throw new BadRequestException('Ya existe un tarifario con fechas que se solapan');
       }
     }
 
+    // Crear la entidad con la relación
     const rate = this.rateRepository.create({
       ...createRateDto,
       service: { id: createRateDto.serviceId },
     });
+
     return this.rateRepository.save(rate);
   }
 
@@ -44,8 +49,27 @@ export class RatesService {
     return this.rateRepository.findOne({ where: { id }, relations: ['service'] });
   }
 
-  update(id: number, updateRateDto: UpdateRateDto) {
-    return this.rateRepository.update(id, updateRateDto);
+  async update(id: number, updateRateDto: UpdateRateDto) {
+    // Extraer serviceId del DTO
+    const { serviceId, ...rest } = updateRateDto;
+    
+    // Si viene serviceId, construir el objeto con la relación
+    const updateData: any = { ...rest };
+    if (serviceId) {
+      updateData.service = { id: serviceId };
+    }
+    
+    // Buscar el rate existente
+    const rate = await this.rateRepository.findOne({ where: { id } });
+    if (!rate) {
+      throw new BadRequestException('Tarifario no encontrado');
+    }
+    
+    // Mezclar datos existentes con nuevos
+    Object.assign(rate, updateData);
+    
+    // Guardar
+    return this.rateRepository.save(rate);
   }
 
   remove(id: number) {

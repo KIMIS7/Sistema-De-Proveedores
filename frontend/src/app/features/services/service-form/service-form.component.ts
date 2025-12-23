@@ -62,7 +62,7 @@ export class ServiceFormComponent implements OnInit {
         this.form.patchValue({
           name: service.name,
           description: service.description,
-          providerId: service.provider?.id,
+          providerId: service.providerId || service.provider?.id,
           isActive: service.isActive
         });
         this.loading = false;

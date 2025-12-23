@@ -80,7 +80,7 @@ export class RateFormComponent implements OnInit {
           currency: rate.currency,
           startDate: startDate,
           endDate: endDate,
-          serviceId: rate.service?.id
+          serviceId: rate.serviceId || rate.service?.id
         });
         this.loading = false;
       },

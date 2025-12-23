@@ -28,8 +28,27 @@ export class ServicesService {
     return this.serviceRepository.findOne({ where: { id }, relations: ['provider', 'rates'] });
   }
 
-  update(id: number, updateServiceDto: UpdateServiceDto) {
-    return this.serviceRepository.update(id, updateServiceDto);
+  async update(id: number, updateServiceDto: UpdateServiceDto) {
+    // Extraer providerId del DTO
+    const { providerId, ...rest } = updateServiceDto;
+    
+    // Si viene providerId, construir el objeto con la relación
+    const updateData: any = { ...rest };
+    if (providerId) {
+      updateData.provider = { id: providerId };
+    }
+    
+    // Buscar el servicio existente
+    const service = await this.serviceRepository.findOne({ where: { id } });
+    if (!service) {
+      throw new BadRequestException('Servicio no encontrado');
+    }
+    
+    // Mezclar datos existentes con nuevos
+    Object.assign(service, updateData);
+    
+    // Guardar
+    return this.serviceRepository.save(service);
   }
 
   async remove(id: number) {
